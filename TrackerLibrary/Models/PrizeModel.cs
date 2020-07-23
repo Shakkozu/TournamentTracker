@@ -1,5 +1,6 @@
 ﻿namespace TrackerLibrary.Models
 {
+    //Represents one prize
     public class PrizeModel
     {
         /// <summary>

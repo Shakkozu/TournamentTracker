@@ -4,6 +4,9 @@ using System.Text;
 
 namespace TrackerLibrary.Models
 {
+    /// <summary>
+    /// Represents one team
+    /// </summary>
     public class TeamModel
     {
         /// <summary>
