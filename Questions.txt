@@ -3,3 +3,7 @@ Static class for data source info
 
 2.How do we connect to two different data sources to do the same task? (textfiles/DB/both)
 Interface for data sources
+
+3.How to wire up to SQL DB?
+- Lets use DAPPER
+- Add Connection string to App.config to let Dapper connect to DB

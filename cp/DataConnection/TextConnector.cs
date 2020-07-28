@@ -4,7 +4,7 @@ using System.Text;
 using TrackerLibrary.Interfaces;
 using TrackerLibrary.Models;
 
-namespace TrackerLibrary.DBConnection
+namespace TrackerLibrary.DataAccess
 {
     public class TextConnector : IDataConnection
     {

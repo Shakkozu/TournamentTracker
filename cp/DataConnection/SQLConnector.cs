@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 using TrackerLibrary.Interfaces;
 using TrackerLibrary.Models;
 
-namespace TrackerLibrary.DBConnection
+namespace TrackerLibrary.DataAccess
 {
     public class SQLConnector : IDataConnection
     {
@@ -16,11 +17,11 @@ namespace TrackerLibrary.DBConnection
         /// <returns>The prize information, including the unique identifier</returns>
         public PrizeModel CreatePrize(PrizeModel model)
         {
-            model.Id = 1; 
-
-            return model;
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString("Tournaments")))
+            {
+                return new PrizeModel();
+            }
         }
-
 
 
 
