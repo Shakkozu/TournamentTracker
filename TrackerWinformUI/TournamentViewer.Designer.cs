@@ -119,7 +119,7 @@
             this.teamOneNameLabel.AutoSize = true;
             this.teamOneNameLabel.Font = new System.Drawing.Font("Segoe UI Light", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.teamOneNameLabel.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.teamOneNameLabel.Location = new System.Drawing.Point(532, 264);
+            this.teamOneNameLabel.Location = new System.Drawing.Point(532, 276);
             this.teamOneNameLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.teamOneNameLabel.Name = "teamOneNameLabel";
             this.teamOneNameLabel.Size = new System.Drawing.Size(189, 40);
