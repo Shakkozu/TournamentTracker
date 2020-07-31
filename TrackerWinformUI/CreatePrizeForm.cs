@@ -15,17 +15,20 @@ namespace TrackerWinformUI
 
         private void createTeamButton_Click(object sender, EventArgs e)
         {
+            //If Form is filled with correct data
             if(ValidateForm())
             {
+                //Create new PrizeModel based on from values
                 PrizeModel model = new PrizeModel(
                     placeNameValue.Text, 
                     placeNumberValue.Text, 
                     prizeAmountValue.Text, 
                     prizePercentageValue.Text);
 
+                //Add new record to the database/textfile
                 GlobalConfig.Connection.CreatePrize(model);
                
-
+                //Reset the form values
                 placeNameValue.Text = "";
                 placeNumberValue.Text = "";
                 prizeAmountValue.Text = "0";

@@ -10,6 +10,10 @@ namespace TrackerLibrary.Models
     public class PersonModel
     {
         /// <summary>
+        /// The unique identifier for the prize.
+        /// </summary>
+        public int Id { get; set; }
+        /// <summary>
         /// Represents Player 'sFirstName
         /// </summary>
         public string FirstName{ get; set; }
@@ -28,6 +32,5 @@ namespace TrackerLibrary.Models
         /// Represents Player's Cellphone Number
         /// </summary>
         public string CellphoneNumber { get; set; }
-
     }
 }
