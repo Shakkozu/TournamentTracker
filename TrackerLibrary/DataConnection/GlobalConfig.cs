@@ -9,7 +9,7 @@ namespace TrackerLibrary.DataAccess
     public static class GlobalConfig
     {
         /// <summary>
-        /// List of connections
+        /// Connection
         /// </summary>
         public static IDataConnection Connection { get; private set; }
 

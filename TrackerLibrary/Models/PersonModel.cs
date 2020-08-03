@@ -16,7 +16,7 @@ namespace TrackerLibrary.Models
         /// <summary>
         /// Represents Player 'sFirstName
         /// </summary>
-        public string FirstName{ get; set; }
+        public string FirstName { get; set; }
 
         /// <summary>
         /// Represents Player's LastName
@@ -32,5 +32,15 @@ namespace TrackerLibrary.Models
         /// Represents Player's Cellphone Number
         /// </summary>
         public string CellphoneNumber { get; set; }
+
+        public string FullName 
+        {
+            get
+            {
+                return $"{ FirstName } { LastName }";
+            }
+        }
+        
+     
     }
 }
