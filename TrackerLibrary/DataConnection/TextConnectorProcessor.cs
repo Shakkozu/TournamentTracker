@@ -76,8 +76,10 @@ namespace TrackerLibrary.DataConnection.TextHelpers
                 team.Id = int.Parse(cols[0]);
                 team.TeamName = cols[1];
                 
+                //Get all people ids
                 string[] peopleIds = cols[2].Split('|');
 
+                //Add team members with known id's
                 foreach (string id in peopleIds)
                 {
                     team.TeamMembers.Add(people.Where(x => x.Id == int.Parse(id)).First());

@@ -23,5 +23,8 @@ namespace TrackerLibrary.Interfaces
         TeamModel CreateTeam(TeamModel team);
 
         List<PersonModel> GetPerson_All();
+
+        List<TeamModel> GetTeam_All();
+
     }
 }

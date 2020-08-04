@@ -44,6 +44,7 @@ namespace TrackerWinformUI
             selectTeamMemberDropDown.DataSource = availableTeamMembers;
             selectTeamMemberDropDown.DisplayMember = "FullName";
 
+
             teamMembersListBox.DataSource = null;
 
             teamMembersListBox.DataSource = selectedTeamMembers;
@@ -111,7 +112,8 @@ namespace TrackerWinformUI
             selectedTeamMembers.Add(person);
             availableTeamMembers.Remove(person);
 
-            WireUpLists();}
+            WireUpLists();
+            }
         }
 
         private void removeSelectedMemberButton_Click(object sender, EventArgs e)

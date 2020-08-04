@@ -77,8 +77,6 @@ namespace TrackerLibrary.DataAccess
         public TeamModel CreateTeam(TeamModel model)
         {
             // Load the text File
-            // Convert the text to List<PrizeModel>
-
             List<TeamModel> teams = TeamsFile.FullFilePath().LoadFile().ConvertToTeamModel(PeopleFile);
 
             // Find the max ID
@@ -104,6 +102,11 @@ namespace TrackerLibrary.DataAccess
         {
             List<PersonModel> output = PeopleFile.FullFilePath().LoadFile().ConvertToPersonModel();
             return output;
+        }
+
+        public List<TeamModel> GetTeam_All()
+        {
+            throw new NotImplementedException();
         }
     }
 }
