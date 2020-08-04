@@ -38,7 +38,7 @@
             this.prizePercentageValue = new System.Windows.Forms.TextBox();
             this.prizePercentageLabel = new System.Windows.Forms.Label();
             this.prizeOrLabel = new System.Windows.Forms.Label();
-            this.createTeamButton = new System.Windows.Forms.Button();
+            this.createPrizeButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // createPrizeLabel
@@ -143,21 +143,21 @@
             this.prizeOrLabel.TabIndex = 21;
             this.prizeOrLabel.Text = "- or -";
             // 
-            // createTeamButton
+            // createPrizeButton
             // 
-            this.createTeamButton.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.createTeamButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DimGray;
-            this.createTeamButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
-            this.createTeamButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.createTeamButton.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.createTeamButton.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.createTeamButton.Location = new System.Drawing.Point(146, 414);
-            this.createTeamButton.Name = "createTeamButton";
-            this.createTeamButton.Size = new System.Drawing.Size(264, 80);
-            this.createTeamButton.TabIndex = 31;
-            this.createTeamButton.Text = "Create Prize";
-            this.createTeamButton.UseVisualStyleBackColor = true;
-            this.createTeamButton.Click += new System.EventHandler(this.createTeamButton_Click);
+            this.createPrizeButton.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.createPrizeButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DimGray;
+            this.createPrizeButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.createPrizeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.createPrizeButton.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.createPrizeButton.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.createPrizeButton.Location = new System.Drawing.Point(146, 414);
+            this.createPrizeButton.Name = "createPrizeButton";
+            this.createPrizeButton.Size = new System.Drawing.Size(264, 80);
+            this.createPrizeButton.TabIndex = 31;
+            this.createPrizeButton.Text = "Create Prize";
+            this.createPrizeButton.UseVisualStyleBackColor = true;
+            this.createPrizeButton.Click += new System.EventHandler(this.createPrizeButton_Click);
             // 
             // CreatePrizeForm
             // 
@@ -165,7 +165,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(549, 506);
-            this.Controls.Add(this.createTeamButton);
+            this.Controls.Add(this.createPrizeButton);
             this.Controls.Add(this.prizeOrLabel);
             this.Controls.Add(this.prizePercentageValue);
             this.Controls.Add(this.prizeAmountValue);
@@ -198,6 +198,6 @@
         private System.Windows.Forms.TextBox prizePercentageValue;
         private System.Windows.Forms.Label prizePercentageLabel;
         private System.Windows.Forms.Label prizeOrLabel;
-        private System.Windows.Forms.Button createTeamButton;
+        private System.Windows.Forms.Button createPrizeButton;
     }
 }

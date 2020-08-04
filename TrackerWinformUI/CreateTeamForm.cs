@@ -17,10 +17,12 @@ namespace TrackerWinformUI
 
         private List<PersonModel> availableTeamMembers = GlobalConfig.Connection.GetPerson_All();
         private List<PersonModel> selectedTeamMembers = new List<PersonModel>();
-        public CreateTeamForm()
+
+        private ITeamRequester callingForm;
+        public CreateTeamForm(ITeamRequester caller)
         {
             InitializeComponent();
-
+            callingForm = caller;
             //CreateSampleData();
             WireUpLists();
         }
@@ -136,8 +138,14 @@ namespace TrackerWinformUI
             t.TeamName = teamNameValue.Text;
             t.TeamMembers = selectedTeamMembers;
 
-            t = GlobalConfig.Connection.CreateTeam(t);
+            //Why not t= GlobalCondig.Connection.CreateTeam(t)? - Because CreateTeam parameter points to address, and it updates
+            //parameter within function call
+            GlobalConfig.Connection.CreateTeam(t);
+           
 
+            callingForm.TeamComplete(t);
+
+            this.Close();
             // TODO - If we aren't closing this form after creation, reset the form
             
         }

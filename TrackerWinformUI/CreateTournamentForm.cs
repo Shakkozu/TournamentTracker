@@ -12,12 +12,13 @@ using TrackerLibrary.Models;
 
 namespace TrackerWinformUI
 {
-    public partial class CreateTournamentForm : Form
+    public partial class CreateTournamentForm : Form, IPrizeRequester, ITeamRequester
     {
         List<TeamModel> availableTeams = GlobalConfig.Connection.GetTeam_All();
         List<TeamModel> selectedTeams = new List<TeamModel>();
 
         List<PrizeModel> selectedPrizes = new List<PrizeModel>();
+
         public CreateTournamentForm()
         {
             InitializeComponent();
@@ -41,6 +42,8 @@ namespace TrackerWinformUI
             prizesListBox.DataSource = null;
             prizesListBox.DataSource = selectedPrizes;
             prizesListBox.DisplayMember = "PlaceName";
+
+
 
         }
 
@@ -72,7 +75,46 @@ namespace TrackerWinformUI
 
         private void removeSelectedPrizeButton_Click(object sender, EventArgs e)
         {
-            //TODO Write this code
+            PrizeModel prize = (PrizeModel)prizesListBox.SelectedItem;
+            if (prize != null)
+            {
+
+                selectedPrizes.Remove(prize);
+
+                WireUpLists();
+            }
+        }
+
+        private void createPrizeButton_Click(object sender, EventArgs e)
+        {
+            //Call the create prize form
+            CreatePrizeForm frm = new CreatePrizeForm(this);
+            frm.Show();
+        }            
+
+        public void PrizeComplete(PrizeModel model)
+        {
+            //Get back from the form a PrizeModel
+            //Take the PrizeModel and put it into our list of selected Prizes
+            selectedPrizes.Add(model);
+            WireUpLists();
+        }
+
+        public void TeamComplete(TeamModel model)
+        {
+            selectedTeams.Add(model);
+            WireUpLists();
+        }
+
+        private void createNewTeamLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            CreateTeamForm frm = new CreateTeamForm(this);
+            frm.Show();
+        }
+
+        private void createTournamentButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

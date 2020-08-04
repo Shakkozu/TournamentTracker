@@ -8,12 +8,18 @@ namespace TrackerWinformUI
 {
     public partial class CreatePrizeForm : Form
     {
-        public CreatePrizeForm()
+        /// <summary>
+        /// Defines parent that called this form. This variable is used to return created prize
+        /// </summary>
+        IPrizeRequester callingForm;
+        public CreatePrizeForm(IPrizeRequester caller)
         {
             InitializeComponent();
+
+            callingForm = caller;
         }
 
-        private void createTeamButton_Click(object sender, EventArgs e)
+        private void createPrizeButton_Click(object sender, EventArgs e)
         {
             //If Form is filled with correct data
             if(ValidateForm())
@@ -27,12 +33,17 @@ namespace TrackerWinformUI
 
                 //Add new record to the database/textfile
                 GlobalConfig.Connection.CreatePrize(model);
-               
+
+                callingForm.PrizeComplete(model);
+
+                this.Close();
+
                 //Reset the form values
-                placeNameValue.Text = "";
-                placeNumberValue.Text = "";
-                prizeAmountValue.Text = "0";
-                prizePercentageValue.Text = "0";
+
+                //placeNameValue.Text = "";
+                //placeNumberValue.Text = "";
+                //prizeAmountValue.Text = "0";
+                //prizePercentageValue.Text = "0";
             }
             else
             {
