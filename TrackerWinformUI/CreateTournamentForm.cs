@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrackerLibrary;
 using TrackerLibrary.DataAccess;
 using TrackerLibrary.Models;
 
@@ -135,6 +136,8 @@ namespace TrackerWinformUI
             tm.EnteredTeams = selectedTeams;
 
             //TODO Wire up matchups
+            TournamentLogic.CreateRounds(tm);
+
 
             //Create tournament entry, using tournamentName, EntryFee,
             //Create all of the prizes entries
