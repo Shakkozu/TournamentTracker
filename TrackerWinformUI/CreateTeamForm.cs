@@ -18,7 +18,13 @@ namespace TrackerWinformUI
         private List<PersonModel> availableTeamMembers = GlobalConfig.Connection.GetPerson_All();
         private List<PersonModel> selectedTeamMembers = new List<PersonModel>();
 
+        /// <summary>
+        /// Item that requested creation of this form. 
+        /// The idea is to call this form, after click button "Create New Team"
+        /// So result will be returned as changing 'callingForm' property
+        /// </summary>
         private ITeamRequester callingForm;
+
         public CreateTeamForm(ITeamRequester caller)
         {
             InitializeComponent();

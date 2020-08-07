@@ -36,14 +36,8 @@ namespace TrackerWinformUI
 
                 callingForm.PrizeComplete(model);
 
-                this.Close();
+                Close();
 
-                //Reset the form values
-
-                //placeNameValue.Text = "";
-                //placeNumberValue.Text = "";
-                //prizeAmountValue.Text = "0";
-                //prizePercentageValue.Text = "0";
             }
             else
             {

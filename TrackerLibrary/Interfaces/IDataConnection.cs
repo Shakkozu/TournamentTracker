@@ -20,6 +20,8 @@ namespace TrackerLibrary.Interfaces
         /// <returns></returns>
         PersonModel CreatePerson(PersonModel p);
 
+        void CreateTournament(TournamentModel tm);
+
         TeamModel CreateTeam(TeamModel team);
 
         List<PersonModel> GetPerson_All();
