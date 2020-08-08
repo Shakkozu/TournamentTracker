@@ -27,6 +27,6 @@ namespace TrackerLibrary.Models
         /// </summary>
         public MatchupModel ParentMatchup { get; set; }
 
-
+   
     }
 }

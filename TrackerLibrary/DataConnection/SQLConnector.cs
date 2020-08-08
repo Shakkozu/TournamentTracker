@@ -60,8 +60,7 @@ namespace TrackerLibrary.DataAccess
         /// <param name="model"></param>
         /// <returns></returns>
         public TeamModel CreateTeam(TeamModel model)
-        {
-            //TODO Check another time if you understand what's going on there
+        { 
 
             //Connect to db
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(db)))
@@ -102,8 +101,68 @@ namespace TrackerLibrary.DataAccess
 
                 SaveTournamentEntries(model, connection);
 
-                //TODO Add Tournament Rounds
+                SaveTournamentRounds(model, connection);
             }
+        }
+
+        private void SaveTournamentRounds(TournamentModel model, IDbConnection connection)
+        {
+
+            // Loop through the rounds
+            // Loop through the matchups
+            // Save the matchup
+            // Loop through the entries and save them
+            int roundCounter = 0;
+
+            foreach (List<MatchupModel> round in model.Rounds)
+            {
+                foreach (MatchupModel matchup in round)
+                {
+
+                    var p = new DynamicParameters();
+
+                    // Add matchup to db
+                    p.Add("@TournamentId", model.Id);
+                    p.Add("@MatchupRound",matchup.MatchupRound);
+                    p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+                    connection.Execute("dbo.spMatchups_Insert", p, commandType: CommandType.StoredProcedure);
+
+                    //get inserted matchup id from database
+                    matchup.Id = p.Get<int>("@id");
+
+                    // Add matchup entry to db
+                    foreach (MatchupEntryModel entryModel in matchup.Entries)
+                    {
+                        p = new DynamicParameters();
+                        p.Add("@MatchupId", matchup.Id);
+                        
+                        if (entryModel.ParentMatchup == null)
+                        {
+                            p.Add("@ParentMatchupId", null);
+                        }
+                        else
+                        {
+                            p.Add("@ParentMatchupId", entryModel.ParentMatchup.Id);
+                        }
+                        if(entryModel.TeamCompeting == null)
+                        {
+                            p.Add("@TeamCompetingId", null);
+                        }
+                        else
+                        {
+                            p.Add("@TeamCompetingId", entryModel.TeamCompeting.Id);
+                        }
+                       
+                        p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+                        connection.Execute("dbo.spMatchupEntries_Insert", p, commandType: CommandType.StoredProcedure);
+
+                    }
+                }
+                roundCounter++;
+            }
+
         }
 
         private void SaveTournament(TournamentModel tournamentModel, IDbConnection connection)

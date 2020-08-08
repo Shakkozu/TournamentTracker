@@ -46,7 +46,6 @@ namespace TrackerWinformUI
 
         private void WireUpLists()
         {
-            //TODO Refactor to more efficient form
             selectTeamMemberDropDown.DataSource = null;
 
             selectTeamMemberDropDown.DataSource = availableTeamMembers;
@@ -92,7 +91,7 @@ namespace TrackerWinformUI
 
         private bool ValidateForm()
         {
-            //TODO - Add validation to the form
+            //TODO - Upgrade form's  validation 
             if (firstNameValue.Text.Length == 0)
             {
                 return false;

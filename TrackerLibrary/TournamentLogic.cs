@@ -27,6 +27,9 @@ namespace TrackerLibrary
 
         } 
 
+        /// <summary>
+        /// Function creates rounds of the tournament that have to be played
+        /// </summary>
         private static void CreateOtherRounds(TournamentModel model, int rounds)
         {
 
@@ -43,6 +46,7 @@ namespace TrackerLibrary
                 {
 
                     currMatchup.Entries.Add(new MatchupEntryModel { ParentMatchup = matchup });
+                    //If there are 2 teams in MatchupEntry, reset Add it to current Round list, and reset current Matchup
                     if(currMatchup.Entries.Count > 1)
                     {
                         currMatchup.MatchupRound = round;
@@ -50,6 +54,8 @@ namespace TrackerLibrary
                         currMatchup = new MatchupModel();
                     }
                 }
+                // When adding entries for current round is done, add this round to list of rounds
+                // and head to creating next one, after reseting current Round variable
                 model.Rounds.Add(currRound);
                 previousRound = currRound;
 
@@ -58,6 +64,9 @@ namespace TrackerLibrary
             }
         }
 
+        /// <summary>
+        /// Function creates first round of tournament
+        /// </summary>
         private static List<MatchupModel> CreateFirstRound(int byes, List<TeamModel> teams)
         {
             List<MatchupModel> output = new List<MatchupModel>();
@@ -88,6 +97,9 @@ namespace TrackerLibrary
             return output;
         }
 
+        /// <summary>
+        /// Function finds number of 'byes' which will cover first round up to n^2 matchups
+        /// </summary>
         private static int NumberOfByes(int rounds, int numberOfTeams)
         {
             int output = 0;
@@ -105,6 +117,9 @@ namespace TrackerLibrary
             return output;
         }
 
+        /// <summary>
+        /// Function finds needed number of rounds to create valid tournament
+        /// </summary>
         private static int FindNumberOfRounds(int teamCount)
         {
             int output = 1;
@@ -118,6 +133,10 @@ namespace TrackerLibrary
             return output;
         }
 
+        /// <summary>
+        /// Randomizes teams order passed in parameter
+        /// </summary>
+        /// <returns></returns>
         private static List<TeamModel> RandomizeTeamOrder(List<TeamModel> teams)
         {
             teams.OrderBy(x => Guid.NewGuid()).ToList();

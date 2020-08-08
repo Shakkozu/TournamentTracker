@@ -8,6 +8,13 @@ namespace TrackerLibrary.DataAccess
 {
     public static class GlobalConfig
     {
+
+        public const string PrizesFile = "PrizeModels.csv";
+        public const string PeopleFile = "PeopleModels.csv";
+        public const string TeamFile = "TeamModels.csv";
+        public const string TournamentFile = "TournamentModels.csv";
+        public const string MatchupFile = "MatchupModels.csv";
+        public const string MatchupEntryFile = "MatchupEntryModels.csv";
         /// <summary>
         /// Connection
         /// </summary>
@@ -24,12 +31,10 @@ namespace TrackerLibrary.DataAccess
             switch (db)
             {
                 case DatabaseType.Sql:
-                    //TODO - Set up the SQL Connector properly
                     SQLConnector sql = new SQLConnector();
                     Connection = sql;
                     break;
                 case DatabaseType.TextFile:
-                    //TODO - Create the Text Connection
                     TextConnector text = new TextConnector();
                     Connection = text;
                     break;
