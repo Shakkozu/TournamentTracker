@@ -42,5 +42,12 @@ namespace TrackerWinformUI
             availableTournaments.Add(model);
             WireUpLists();
         }
+
+        private void loadTournamentButton_Click(object sender, EventArgs e)
+        {
+            TournamentModel tm = (TournamentModel)loadExistingTournamentDropDown.SelectedItem;
+            TournamentViewer frm = new TournamentViewer(tm);
+            frm.Show();
+        }
     }
 }
