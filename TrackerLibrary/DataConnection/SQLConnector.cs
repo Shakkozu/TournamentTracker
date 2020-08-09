@@ -238,5 +238,101 @@ namespace TrackerLibrary.DataAccess
             return output;
 
         }
+
+       
+
+        public List<TournamentModel> GetTournament_All()
+        {
+            List<TournamentModel> output;
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(db)))
+            {
+                output = connection.Query<TournamentModel>("dbo.spTournaments_GetAll").ToList();
+
+               
+                foreach (TournamentModel tournament in output)
+                {
+                    List<MatchupModel> round = new List<MatchupModel>();
+                    // Populate Prizes
+
+                    var p = new DynamicParameters();
+                    p.Add("@TournamentId", tournament.Id);
+                    tournament.Prizes = connection.Query<PrizeModel>("dbo.spPrizes_GetByTournament", p, commandType: CommandType.StoredProcedure).ToList();
+
+                    
+                    // Populate Teams
+
+                    //var p = new DynamicParameters();
+                    tournament.EnteredTeams = connection.Query<TeamModel>("dbo.spTeam_GetByTournament", p, commandType: CommandType.StoredProcedure).ToList();
+
+                    foreach (TeamModel team in tournament.EnteredTeams)
+                    {
+                        var par = new DynamicParameters();
+                        par.Add("@TeamId", team.Id);
+                        team.TeamMembers = connection.Query<PersonModel>("dbo.spTeamMembers_GetByTeam", par, commandType: CommandType.StoredProcedure).ToList();
+
+                    }
+
+
+                    // Populate Rounds
+           
+                    List<MatchupModel> matchups = connection.Query<MatchupModel>("dbo.spMatchups_GetByTournament", p, commandType: CommandType.StoredProcedure).ToList();
+                    
+                    foreach (MatchupModel matchup in matchups)
+                    {
+                        round = new List<MatchupModel>();
+                        var par = new DynamicParameters();
+                        par.Add("@MatchupId", matchup.Id);
+
+                        // Populate Rounds
+                        matchup.Entries = connection.Query<MatchupEntryModel>("dbo.spMatchupEntries_GetByMatchup",par, commandType: CommandType.StoredProcedure).ToList();
+
+
+                        // Populate each matchup (1 model)
+                        List<TeamModel> allTeams = GetTeam_All();
+                        if(matchup.WinnerId > 0)
+                        {
+                            matchup.Winner = allTeams.Where(x => x.Id == matchup.WinnerId).First();
+                        }
+
+                        // Populate each entry (2 models)
+                        foreach (MatchupEntryModel entry in matchup.Entries)
+                        {
+                            //if team competing has valid id
+                            if(entry.TeamCompetingId > 0)
+                            {
+                                entry.TeamCompeting = allTeams.Where(x => x.Id == entry.TeamCompetingId).First();
+                            }
+                        
+                            // If parent matchup has valid id
+                            if(entry.ParentMatchupId > 0)
+                            {
+                                entry.ParentMatchup = matchups.Where(x => x.Id == entry.ParentMatchupId).First();
+                            }
+                        
+                        }
+                    }
+
+                    List<MatchupModel> currRow = new List<MatchupModel>();
+                    int currRound = 1;
+                    foreach (MatchupModel matchup in matchups)
+                    {
+                        if (matchup.MatchupRound > currRound)
+                        {
+                            tournament.Rounds.Add(currRow);
+
+                            currRound += 1;
+                            currRow = new List<MatchupModel>();
+                        }
+
+                        currRow.Add(matchup);
+                        
+                    }
+                    // To add last round
+                    tournament.Rounds.Add(currRow);
+                }
+
+            }
+            return output;
+        }
     }
 }

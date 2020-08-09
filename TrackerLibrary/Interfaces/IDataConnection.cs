@@ -28,5 +28,8 @@ namespace TrackerLibrary.Interfaces
 
         List<TeamModel> GetTeam_All();
 
+        List<TournamentModel> GetTournament_All();
+
+
     }
 }

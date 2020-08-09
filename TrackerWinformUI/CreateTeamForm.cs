@@ -150,7 +150,7 @@ namespace TrackerWinformUI
 
             callingForm.TeamComplete(t);
 
-            this.Close();
+            Close();
             // TODO - If we aren't closing this form after creation, reset the form
             
         }

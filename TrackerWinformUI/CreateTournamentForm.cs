@@ -20,11 +20,16 @@ namespace TrackerWinformUI
 
         List<PrizeModel> selectedPrizes = new List<PrizeModel>();
 
-        public CreateTournamentForm()
+        ITournamentRequester callingForm;
+
+        public CreateTournamentForm(ITournamentRequester caller)
         {
             InitializeComponent();
             WireUpLists();
+            callingForm = caller;
         }
+
+  
 
         private void WireUpLists()
         {
@@ -134,7 +139,10 @@ namespace TrackerWinformUI
                 //Create tournament entry, using tournamentName, EntryFee,
                 //Create all of the prizes entries
                 //Create all of the team entries
-                GlobalConfig.Connection.CreateTournament(tm); 
+                GlobalConfig.Connection.CreateTournament(tm);
+
+                callingForm.TournamentComplete(tm);
+                Close();
             }
             
 
