@@ -22,6 +22,8 @@ namespace TrackerLibrary.Interfaces
 
         void CreateTournament(TournamentModel tm);
 
+        void UpdateMatchup(MatchupModel m);
+
         TeamModel CreateTeam(TeamModel team);
 
         List<PersonModel> GetPerson_All();

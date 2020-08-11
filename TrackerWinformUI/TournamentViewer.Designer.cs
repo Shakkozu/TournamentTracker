@@ -104,6 +104,7 @@
             this.unplayedOnlyCheckBox.TabIndex = 4;
             this.unplayedOnlyCheckBox.Text = "Unplayed Only";
             this.unplayedOnlyCheckBox.UseVisualStyleBackColor = true;
+            this.unplayedOnlyCheckBox.CheckedChanged += new System.EventHandler(this.unplayedOnlyCheckBox_CheckedChanged);
             // 
             // matchupListBox
             // 
@@ -197,12 +198,13 @@
             this.scoreButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
             this.scoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.scoreButton.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.scoreButton.Location = new System.Drawing.Point(798, 418);
+            this.scoreButton.Location = new System.Drawing.Point(797, 409);
             this.scoreButton.Name = "scoreButton";
-            this.scoreButton.Size = new System.Drawing.Size(135, 39);
+            this.scoreButton.Size = new System.Drawing.Size(135, 57);
             this.scoreButton.TabIndex = 14;
             this.scoreButton.Text = "Score";
             this.scoreButton.UseVisualStyleBackColor = true;
+            this.scoreButton.Click += new System.EventHandler(this.scoreButton_Click);
             // 
             // TournamentViewer
             // 

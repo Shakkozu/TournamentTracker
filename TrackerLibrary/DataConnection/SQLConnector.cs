@@ -334,5 +334,41 @@ namespace TrackerLibrary.DataAccess
             }
             return output;
         }
+
+        public void UpdateMatchup(MatchupModel m)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(db)))
+            {
+                var p = new DynamicParameters();
+
+                if (m.Winner != null)
+                {
+                    p.Add("@id", m.Id);
+                    p.Add("@WinnerId", m.Winner.Id);
+
+                    connection.Execute("dbo.spMatchups_Update", p, commandType: CommandType.StoredProcedure);
+
+                }
+                //spMatchupEntries_Update id, TeamCompetingId, Score
+
+                foreach (MatchupEntryModel me in m.Entries)
+                {
+                    if (me.TeamCompeting != null)
+                    {
+                        p = new DynamicParameters();
+
+                        p.Add("@id", me.Id);
+                        p.Add("@TeamCompetingId", me.TeamCompeting.Id);
+                        p.Add("@Score", me.Score);
+
+
+                        connection.Execute("dbo.spMatchupEntries_Update", p, commandType: CommandType.StoredProcedure); 
+                    }
+                }
+                
+
+            }
+
+        }
     }
 }
