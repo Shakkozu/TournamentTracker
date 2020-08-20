@@ -12,19 +12,21 @@ namespace TrackerLibrary.Interfaces
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        PrizeModel CreatePrize(PrizeModel model);
+        void CreatePrize(PrizeModel model);
+
+
         /// <summary>
         /// Creates person and adds it into actual data storage
         /// </summary>
         /// <param name="p"></param>
         /// <returns></returns>
-        PersonModel CreatePerson(PersonModel p);
+        void CreatePerson(PersonModel p);
 
         void CreateTournament(TournamentModel tm);
 
         void UpdateMatchup(MatchupModel m);
 
-        TeamModel CreateTeam(TeamModel team);
+        void CreateTeam(TeamModel team);
 
         List<PersonModel> GetPerson_All();
 

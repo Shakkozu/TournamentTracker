@@ -71,8 +71,8 @@ namespace TrackerWinformUI
                 p.CellphoneNumber = cellPhoneValue.Text;
                 p.EmailAddress = emailValue.Text;
 
+                GlobalConfig.Connection.CreatePerson(p);
 
-                p = GlobalConfig.Connection.CreatePerson(p);
                 selectedTeamMembers.Add(p);
                 WireUpLists();
 

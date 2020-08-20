@@ -141,6 +141,10 @@ namespace TrackerWinformUI
                 //Create all of the team entries
                 GlobalConfig.Connection.CreateTournament(tm);
 
+                TournamentLogic.UpdateTournamentResults(tm);
+
+                TournamentViewer frm = new TournamentViewer(tm);
+                frm.Show();
                 callingForm.TournamentComplete(tm);
                 Close();
             }

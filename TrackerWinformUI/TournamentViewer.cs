@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrackerLibrary;
 using TrackerLibrary.DataAccess;
 using TrackerLibrary.Models;
 
@@ -174,6 +175,7 @@ namespace TrackerWinformUI
             MatchupModel m = (MatchupModel)matchupListBox.SelectedItem;
             double teamOneScore = 0;
             double teamTwoScore = 0;
+
             for (int i = 0; i < m.Entries.Count; i++)
             {
 
@@ -214,58 +216,10 @@ namespace TrackerWinformUI
                     }
                 }
             }
-            if(teamOneScore > teamTwoScore)
-            {
-                //Team one wins
-                m.Winner = m.Entries[0].TeamCompeting;
-            }
-            else if(teamTwoScore > teamOneScore)
-            {
-                //Team two wins
-                m.Winner = m.Entries[1].TeamCompeting;
-            }
-            else
-            {
-                MessageBox.Show("I do not handle tie games");
-            }
 
-            foreach (List<MatchupModel> round in tournament.Rounds)
-            {
-                foreach (MatchupModel matchup in round)
-                {
-                    foreach (MatchupEntryModel me in matchup.Entries)
-                    {
-                        if (me.ParentMatchup != null)
-                        {
-                            if (me.ParentMatchup.Id == m.Id)
-                            {
-                                me.TeamCompeting = m.Winner;
-                                GlobalConfig.Connection.UpdateMatchup(matchup);
-                            } 
-                        }
-                    }
-                }
-            }
+            TournamentLogic.UpdateTournamentResults(tournament);
 
-            if(selectedMatchups.Count >1)
-            {
-                LoadMatchups((int)roundDropDown.SelectedValue);
-            }
-            else if(selectedMatchups.Count == 1)
-            {
-                int currRound = (int)roundDropDown.SelectedValue;
-                if (rounds.Contains(currRound + 1))
-                {
-                    LoadMatchups(currRound+1);
-                    roundDropDown.SelectedIndex = currRound;
-                }
-                else
-                {
-                    LoadMatchups(currRound);
-                }
-            }
-
-
+            LoadMatchups((int)roundDropDown.SelectedValue);
 
             GlobalConfig.Connection.UpdateMatchup(m);
             
