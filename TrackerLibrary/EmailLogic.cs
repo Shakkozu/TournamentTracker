@@ -10,13 +10,21 @@ namespace TrackerLibrary
 {
     public static class EmailLogic
     {
-        public static void SendEmail(List<string> to, string subject, string body)
+        public static void SendEmail(string to, string subject, string body)
+        {
+            SendEmail(new List<string> { to },new List<string>(), subject, body);
+        }
+
+        public static void SendEmail(List<string> to, List<string> bcc, string subject, string body)
         {
             MailAddress fromMailAddress = new MailAddress(GlobalConfig.AppKeyLookup("senderEmail"), GlobalConfig.AppKeyLookup("senderDisplayName"));
 
             MailMessage mail = new MailMessage();
             
             to.ForEach(x => mail.To.Add(x));
+
+            bcc.ForEach(x => mail.Bcc.Add(x));
+
             mail.From = fromMailAddress;
             mail.Subject = subject;
             mail.Body = body;
@@ -26,8 +34,6 @@ namespace TrackerLibrary
             
             client.Send(mail);
 
-        
-        
         }
 
     }

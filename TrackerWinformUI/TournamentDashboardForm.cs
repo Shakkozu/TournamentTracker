@@ -18,6 +18,8 @@ namespace TrackerWinformUI
         public TournamentDashboardForm()
         {
             InitializeComponent();
+            
+            
             WireUpLists();
         }
         private void WireUpLists()
@@ -39,7 +41,14 @@ namespace TrackerWinformUI
 
         public void TournamentComplete(TournamentModel model)
         {
+            model.OnTournamentComplete += Model_OnTournamentComplete;
             availableTournaments.Add(model);
+            WireUpLists();
+        }
+
+        private void Model_OnTournamentComplete(object sender, DateTime e)
+        {
+            List<TournamentModel> availableTournaments = GlobalConfig.Connection.GetTournament_All();
             WireUpLists();
         }
 

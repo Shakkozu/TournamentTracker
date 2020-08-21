@@ -28,6 +28,7 @@ namespace TrackerLibrary.Interfaces
 
         void CreateTeam(TeamModel team);
 
+        void CompleteTournament(TournamentModel tournament);
         List<PersonModel> GetPerson_All();
 
         List<TeamModel> GetTeam_All();
