@@ -49,6 +49,7 @@
     <Compile Include="DataConnection\SQLConnector.cs" />
     <Compile Include="DataConnection\TextConnector.cs" />
     <Compile Include="DataConnection\TextConnectorProcessor.cs" />
+    <Compile Include="EmailLogic.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Interfaces\IDataConnection.cs" />
     <Compile Include="Models\MatchupEntryModel.cs" />
