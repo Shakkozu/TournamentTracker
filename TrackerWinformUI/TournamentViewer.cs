@@ -172,9 +172,13 @@ namespace TrackerWinformUI
 
         private void scoreButton_Click(object sender, EventArgs e)
         {
+            string errorMessage = ValidateData();
+            if(errorMessage.Length > 0)
+            {
+                MessageBox.Show(errorMessage);
+                return;
+            }
             MatchupModel m = (MatchupModel)matchupListBox.SelectedItem;
-            double teamOneScore = 0;
-            double teamTwoScore = 0;
 
             for (int i = 0; i < m.Entries.Count; i++)
             {
@@ -184,7 +188,7 @@ namespace TrackerWinformUI
 
                     if (m.Entries[0].TeamCompeting != null)
                     {
-                        bool scoreValid = double.TryParse(teamOneScoreTextBox.Text, out teamOneScore);
+                        bool scoreValid = double.TryParse(teamOneScoreTextBox.Text, out double teamOneScore);
                         if (scoreValid)
                         {
                             m.Entries[0].Score = teamOneScore;
@@ -203,7 +207,7 @@ namespace TrackerWinformUI
                     if (m.Entries[1].TeamCompeting != null)
                     {
                         teamOneNameLabel.Text = m.Entries[1].TeamCompeting.TeamName;
-                        bool scoreValid = double.TryParse(teamTwoScoreTextBox.Text, out teamTwoScore);
+                        bool scoreValid = double.TryParse(teamTwoScoreTextBox.Text, out double teamTwoScore);
                         if (scoreValid)
                         {
                             m.Entries[1].Score = teamTwoScore;
@@ -217,12 +221,52 @@ namespace TrackerWinformUI
                 }
             }
 
-            TournamentLogic.UpdateTournamentResults(tournament);
 
+            try
+            {
+                TournamentLogic.UpdateTournamentResults(tournament);
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show($"The application had the following error: { ex.Message }");
+                return; 
+            }
             LoadMatchups((int)roundDropDown.SelectedValue);
 
-            GlobalConfig.Connection.UpdateMatchup(m);
             
+        }
+
+        private string ValidateData()
+        {
+            string output = "";
+
+
+            bool score1Valid = double.TryParse(teamOneScoreTextBox.Text, out double teamOneScore);
+            bool score2Valid = double.TryParse(teamTwoScoreTextBox.Text, out double teamTwoScore);
+
+            if (!score1Valid)
+            {
+                output += "The Score One value is not a valid number\n";
+            }
+            if (!score2Valid)
+            {
+                output += "The Score Two value is not a valid number\n";
+                return output;
+            }
+
+            if(teamOneScore == teamTwoScore)
+            {
+                output += "We do not handle ties!\n";
+            }
+
+            if(teamOneScore == 0 && teamTwoScore == 0)
+            {
+                output += "You did not enter a score for either team\n";
+            }
+
+            return output;
         }
     }
 }

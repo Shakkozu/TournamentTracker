@@ -130,25 +130,6 @@ namespace TrackerLibrary
                 
             }
 
-
-            //if (teamOneScore > teamTwoScore)
-            //{
-            //    //Team one wins
-            //    m.Winner = m.Entries[0].TeamCompeting;
-            //}
-            //else if (teamTwoScore > teamOneScore)
-            //{
-            //    //Team two wins
-            //    m.Winner = m.Entries[1].TeamCompeting;
-            //}
-            //else
-            //{
-            //    MessageBox.Show("I do not handle tie games.");
-            //}
-
-            //
-            //{
-
         }
 
         /// <summary>
